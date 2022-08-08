@@ -1,0 +1,57 @@
+﻿@model DemoMvc.Models.Users
+ 
+
+<div>
+    <h4>Users</h4>
+    <hr />
+     
+
+         
+    <table class="table table-borderless table-hover  ">
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                @Model.UID
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                @Model.Name
+            </td>
+        </tr>
+        <tr>
+            <td>
+                UserName
+            </td>
+            <td>
+                @Model.UserName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Department
+            </td>
+            <td>
+                @Model.Department
+            </td>
+        </tr>
+
+    </table>
+           
+
+
+         
+         
+
+ 
+</div>
+<p>
+         @Html.ActionLink("Back to List", "Index" ,null ,new { @class = "btn btn-dark  btn-sm" })
+     
+</p>

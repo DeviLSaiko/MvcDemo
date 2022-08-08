@@ -1,0 +1,23 @@
+﻿@using DemoMvc.Models;
+
+@model IEnumerable<Departments>
+ 
+
+@{ 
+    ViewBag.Title = "Dep List ";
+}
+
+<h3>
+    Departments List
+</h3>
+
+<ul>
+    @foreach(Departments dep in @Model)
+    {
+        <li>
+            @Html.ActionLink( dep.DepName , "Index" ,new {DepName=dep.DepName},null  )
+        </li>
+    }
+
+
+</ul>
