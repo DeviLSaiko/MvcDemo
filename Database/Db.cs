@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Database1
 {
-    public class Db
+    public class Db : IDb
     {
         public int ID { get; set; }
         [Required]
@@ -16,5 +16,13 @@ namespace Database1
         [Required]
         public string Password { get; set; }
 
+    }
+
+    public interface IDb
+    {
+        int ID { get; set; }
+        [Required]
+        string Password { get; set; }
+      
     }
 }

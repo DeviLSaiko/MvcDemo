@@ -21,39 +21,60 @@ namespace Database1
                 List<Db> db = new List<Db>();
 
                 SqlConnection SqlCon = new SqlConnection(Conn);
-               
-                SqlCommand MyCmd = new SqlCommand("Select * from Admin",SqlCon);
-               
-                if (SqlCon.State == ConnectionState.Closed )
+
+                SqlCommand MyCmd = new SqlCommand("Select * from Admin", SqlCon);
+
+                if (SqlCon.State == ConnectionState.Closed)
                 {
                     SqlCon.Open();
                 }
-                SqlDataReader SqR = MyCmd.ExecuteReader ();
+                SqlDataReader SqR = MyCmd.ExecuteReader();
 
-                while(SqR.Read())
+                while (SqR.Read())
 
                 {
                     Db Admin = new Db();
                     Admin.ID = Convert.ToInt32(SqR["ID"]);
-                    Admin.UserName =  SqR["UserName"].ToString();
+                    Admin.UserName = SqR["UserName"].ToString();
                     Admin.Password = SqR["Password"].ToString();
 
                     db.Add(Admin);
                 }
-                 
+
                 return db;
             }
         }
 
-        public void AdminInsert (Db Admin)
+        public void AdminInsert(Db Admin)
         {
             SqlConnection SqlCon = new SqlConnection(Conn);
             SqlCommand MyCmd = new SqlCommand("insert into Admin(UserName , Password) values(@User , @Pass)", SqlCon);
 
-            MyCmd.Parameters.AddWithValue("@User" , Admin.UserName);
-            MyCmd.Parameters.AddWithValue("@Pass",Admin.Password );
+            MyCmd.Parameters.AddWithValue("@User", Admin.UserName);
+            MyCmd.Parameters.AddWithValue("@Pass", Admin.Password);
             SqlCon.Open();
             MyCmd.ExecuteNonQuery();
         }
+        public void AdminUpdate(Db Admin)
+        {
+            SqlConnection SqlCon = new SqlConnection(Conn);
+            SqlCommand MyCmd = new SqlCommand("Update Admin set UserName=@User , Password=@Pass where ID=@ID", SqlCon);
+            MyCmd.Parameters.AddWithValue("@ID", Admin.ID);
+            MyCmd.Parameters.AddWithValue("@User", Admin.UserName);
+            MyCmd.Parameters.AddWithValue("@Pass", Admin.Password);
+            SqlCon.Open();
+            MyCmd.ExecuteNonQuery();
+        }
+
+        public void AdminDelete(int id)
+        {
+            SqlConnection SqlCon = new SqlConnection(Conn);
+            SqlCommand MyCmd = new SqlCommand("Delete from Admin where ID=@ID", SqlCon);
+            MyCmd.Parameters.AddWithValue("@ID", id);
+            SqlCon.Open();
+            MyCmd.ExecuteNonQuery();
+        }
+
+        
     }
 }

@@ -20,13 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Password", new List<SelectListItem> {
-
-               new SelectListItem {Text="123455678" , Value = "123455678"},
-                  new SelectListItem {Text="123455678" , Value = "123455678"},
-                     new SelectListItem {Text="123455678" , Value = "123455678"},
-
-           } , new {@class = "form-select" } )  
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>

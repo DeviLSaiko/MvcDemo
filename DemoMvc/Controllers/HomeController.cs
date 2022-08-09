@@ -75,18 +75,32 @@ namespace DemoMvc.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Db AdminDb)
+        [ActionName("Edit")]
+        public ActionResult Edit1(int id)
         {
-            if (ModelState.IsValid)
+            LogicDb AdminLogics = new LogicDb();
+
+            Db AdminDb = AdminLogics.db.Single(x => x.ID == id);
+
+            UpdateModel<IDb>(AdminDb);
+
+            if(ModelState.IsValid)
             {
-                LogicDb DbBasee = new LogicDb();
-                DbBasee.AdminInsert(AdminDb);
+                AdminLogics.AdminUpdate(AdminDb);
 
                 return RedirectToAction("Admin");
             }
 
             return View();
         }
+        public ActionResult Delete(int id)
+        {
+            LogicDb AdminLogics = new LogicDb();
+             AdminLogics.AdminDelete(id);
+
+            return RedirectToAction("Admin");
+        }
+
 
     }
 }

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Database1.Db>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "AdminAdd" ,null , new { @class = "btn btn-dark btn-sm" })
 </p>
-<table class="table">
+<table class="table table-borderless">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID } ,new { @class ="btn btn-sm"} ) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }, new { @class = "btn btn-sm" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-sm" })
         </td>
     </tr>
 }
