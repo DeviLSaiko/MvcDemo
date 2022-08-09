@@ -65,5 +65,28 @@ namespace DemoMvc.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            LogicDb EditAdmin = new LogicDb();
+            Db AdminDb = EditAdmin.db.Single(Admin => Admin.ID == id);
+
+            return View(AdminDb);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Db AdminDb)
+        {
+            if (ModelState.IsValid)
+            {
+                LogicDb DbBasee = new LogicDb();
+                DbBasee.AdminInsert(AdminDb);
+
+                return RedirectToAction("Admin");
+            }
+
+            return View();
+        }
+
     }
 }

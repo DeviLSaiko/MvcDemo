@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Database1.Db>
 
 <p>
-    @Html.ActionLink("Create New", "AdminAdd")
+    @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table  table-bordered border shadow rounded-2" >
+<table class="table">
     <tr>
-        <th> User Name
-            
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            Password
+            @Html.DisplayNameFor(model => model.Password)
         </th>
         <th></th>
     </tr>
@@ -22,9 +22,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Password)
         </td>
-       <td>
-
-       </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
     </tr>
 }
 

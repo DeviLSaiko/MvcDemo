@@ -209,8 +209,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Users.cshtml" />
     <Content Include="Views\Home\Dep.cshtml" />
-    <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\AdminAdd.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
