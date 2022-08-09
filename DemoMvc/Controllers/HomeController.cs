@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DemoMvc.Models;
 using Database1;
+using System.Data.Entity.Infrastructure;
 
 namespace DemoMvc.Controllers
 {
@@ -50,18 +51,20 @@ namespace DemoMvc.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminAdd(string UserName , string Password )
+        [ActionName("AdminAdd")]
+        public ActionResult AdminAddD()
         {
-            Db AdminDb = new Db();
+            if(ModelState.IsValid)
+            {
+                Db AdminDb = new Db();
+                UpdateModel(AdminDb);
+                LogicDb DbBasee = new LogicDb();
+                DbBasee.AdminInsert(AdminDb);
 
-            AdminDb.UserName = UserName;
-            AdminDb.Password = Password;
+                return RedirectToAction("Admin");
+            }
 
-            LogicDb DbBasee = new LogicDb();
-            DbBasee.AdminInsert(AdminDb);
-
-            return RedirectToAction("Admin");
-            
+            return View();
         }
 
     }
