@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DemoMvc.Models;
+using Database1;
+
 namespace DemoMvc.Controllers
 {
     public class HomeController : Controller
@@ -30,6 +32,36 @@ namespace DemoMvc.Controllers
             List<Departments> departments = garment.departments.ToList();
 
             return View(departments);
+        }
+        public ActionResult Admin()
+        {
+
+            LogicDb Admin = new LogicDb();
+
+           List<Db> Dbb = Admin.db.ToList();
+
+
+            return View(Dbb);
+        }
+        [HttpGet]
+        public ActionResult AdminAdd()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdminAdd(string UserName , string Password )
+        {
+            Db AdminDb = new Db();
+
+            AdminDb.UserName = UserName;
+            AdminDb.Password = Password;
+
+            LogicDb DbBasee = new LogicDb();
+            DbBasee.AdminInsert(AdminDb);
+
+            return RedirectToAction("Admin");
+            
         }
 
     }

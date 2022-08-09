@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Database1.Db>
+
+<p>
+    @Html.ActionLink("Create New", "AdminAdd")
+</p>
+<table class="table  table-bordered border shadow rounded-2" >
+    <tr>
+        <th> User Name
+            
+        </th>
+        <th>
+            Password
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+       <td>
+
+       </td>
+    </tr>
+}
+
+</table>

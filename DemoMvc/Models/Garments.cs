@@ -8,6 +8,8 @@ namespace DemoMvc.Models
     {
         public DbSet<Users> users { get; set; }
         public DbSet<Departments> departments { get; set; }
+
+        public System.Data.Entity.DbSet<Database1.Db> Dbs { get; set; }
     }
 }
 
