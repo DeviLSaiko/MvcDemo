@@ -52,12 +52,10 @@ namespace DemoMvc.Controllers
 
         [HttpPost]
         [ActionName("AdminAdd")]
-        public ActionResult AdminAddD()
+        public ActionResult AdminAddD(Db AdminDb)
         {
             if(ModelState.IsValid)
             {
-                Db AdminDb = new Db();
-                UpdateModel(AdminDb);
                 LogicDb DbBasee = new LogicDb();
                 DbBasee.AdminInsert(AdminDb);
 
