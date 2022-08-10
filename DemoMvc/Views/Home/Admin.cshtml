@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Database1.Db>
 
 <p>
-    @Html.ActionLink("Create New", "AdminAdd" ,null , new { @class = "btn btn-dark btn-sm" })
+    @Html.ActionLink("Create New", "AdminAdd", null, new { @class = "btn btn-dark btn-sm" })
 </p>
-<table class="table table-borderless">
+<table class="table  table-borderless  ">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -14,20 +14,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID } ,new { @class ="btn btn-sm"} ) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }, new { @class = "btn btn-sm" }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-sm" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Delete", "Home", new { id = item.ID }))
+        {
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" }) 
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-sm" }) 
+
+                    @*<button type="submit" value="Delete" class="btn btn-sm btn-primary  " onclick="Do You Want To Delete @item.UserName ?? ">Edit<i class="fas fa-address-card"></i>  </button>
+
+                    <button type="submit" value="Delete" class="btn btn-sm btn-warning  " onclick="Do You Want To Delete @item.UserName ?? ">Details<i class="fas fa-address-card"></i>  </button>*@
+                     
+                    <input type="submit" value="Delete" class="btn btn-sm btn-danger " onclick="return confirm ('Do You Want To Delete  @item.UserName  ??')" />
+                     
+                    
+
+
+
+                </td>
+            </tr>
+        }
+    }
 
 </table>

@@ -12,7 +12,7 @@ namespace DemoMvc
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<DemoMvc.Models.Garments>(null);
+            Database.SetInitializer<DemoMvc.Models.GarmentsProDb>(null);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

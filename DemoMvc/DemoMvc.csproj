@@ -197,11 +197,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Departments.cs" />
-    <Compile Include="Models\Garments.cs" />
+    <Compile Include="Models\GarmentsProDb.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -220,6 +221,9 @@
     <Content Include="Views\Home\AdminAdd.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Orders\OrdersList.cshtml" />
+    <Content Include="Views\Orders\CreateOrder.cshtml" />
+    <Content Include="Views\Orders\UpdateOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -235,6 +239,13 @@
       <Project>{1df7ddbd-cce8-4041-b92f-711e5a06f6c8}</Project>
       <Name>Database1</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OrdersProject\OrdersProject.csproj">
+      <Project>{4B9BBC60-5C4C-45DC-AD9B-C498E3D1C641}</Project>
+      <Name>OrdersProject</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,10 +11,10 @@ namespace DemoMvc.Controllers
 {
     public class HomeController : Controller
     {
-        
+        GarmentsProDb garment = new GarmentsProDb();
         public ActionResult Users (int id)
         {
-            Garments garment = new Garments();
+            
            Users user = garment.users.Single(usr => usr.UID == id);
 
             return View(user);
@@ -22,14 +22,14 @@ namespace DemoMvc.Controllers
 
         public ActionResult Index( string DepName)
         {
-            Garments garment = new Garments();
+           
            List< Users> userc = garment.users.Where(use => use.Department == DepName).ToList();
 
             return View(userc);
         }
         public ActionResult Dep()
         {
-            Garments garment = new Garments();
+             
             List<Departments> departments = garment.departments.ToList();
 
             return View(departments);
@@ -82,7 +82,7 @@ namespace DemoMvc.Controllers
 
             Db AdminDb = AdminLogics.db.Single(x => x.ID == id);
 
-            UpdateModel<IDb>(AdminDb);
+            UpdateModel(AdminDb);
 
             if(ModelState.IsValid)
             {

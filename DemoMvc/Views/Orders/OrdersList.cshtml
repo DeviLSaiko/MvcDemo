@@ -1,0 +1,108 @@
+﻿@model IEnumerable<OrdersProject.Orders>
+
+<p>
+    @Html.ActionLink("Create New", "CreateOrder")
+</p>
+<table border="1" class="table table-sm">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ETA_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created_Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+
+    using (Html.BeginForm("Delete", "Orders", new { id = item.OID }))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ETA_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created_Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateOrder", new { id = item.OID }, new { @class = "btn btn-sm" }) |
+            @Html.ActionLink("Details", "UpdateOrder", new { id = item.OID }, new { @class = "btn btn-sm" })
+             |
+            
+
+           
+            <!-- Button to Open the Modal -->
+            <button type="button" class="btn btn-danger  btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+                Delete
+            </button>
+
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title"> Please Confirm</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Do You Really Want To delete This Order ??
+                            <br />
+                           <label class="mt-3">OrderID : </label>  @item.OrderID  <br />
+                            <label class="mt-3">ClientName : </label>  @item.ClientName <br />
+                            <label class="mt-3">OrderType : </label>  @item.OrderType <br />
+                            <label class="mt-3">Qty : </label>  @item.Qty <br />
+                            
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" value="Delete" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </td>
+    </tr>
+    }
+}
+</table>
