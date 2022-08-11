@@ -15,4 +15,10 @@ namespace DemoMvc.Models
         public string DepName { get; set; }
          List<Users> Users { get; set; }
     }
+
+    public  class DepGropy
+    {
+        public string Name { get; set; }
+        public int Total { get; set; }
+    }
 }

@@ -18,10 +18,19 @@ namespace DemoMvc.Controllers
 
         public object ModalState { get; private set; }
 
-        public ActionResult OrdersList()
+        public ActionResult OrdersList(string SearchBy , string Search)
         {
-            List<Orders> orders = db.Orders.ToList();
-            return View(orders);
+
+            if(SearchBy == "ClientName")
+            {
+                return View(db.Orders.Where(x => x.ClientName.Contains(Search) || Search== null).ToList());
+            }
+            else
+            {
+                return View(db.Orders.Where(x => x.Status.ToString() ==  Search || Search == null).ToList());
+            }
+
+            
         }
         public ActionResult CreateOrder()
         {

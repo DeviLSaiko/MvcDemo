@@ -12,24 +12,24 @@ namespace DemoMvc.Controllers
     public class HomeController : Controller
     {
         GarmentsProDb garment = new GarmentsProDb();
-        public ActionResult Users (int id)
+        public ActionResult Users(int id)
         {
-            
-           Users user = garment.users.Single(usr => usr.UID == id);
+
+            Users user = garment.users.Single(usr => usr.UID == id);
 
             return View(user);
         }
 
-        public ActionResult Index( string DepName)
+        public ActionResult Index(string DepName)
         {
-           
-           List< Users> userc = garment.users.Where(use => use.Department == DepName).ToList();
+
+            List<Users> userc = garment.users.Where(use => use.Department == DepName).ToList();
 
             return View(userc);
         }
         public ActionResult Dep()
         {
-             
+
             List<Departments> departments = garment.departments.ToList();
 
             return View(departments);
@@ -39,7 +39,7 @@ namespace DemoMvc.Controllers
 
             LogicDb Admin = new LogicDb();
 
-           List<Db> Dbb = Admin.db.ToList();
+            List<Db> Dbb = Admin.db.ToList();
 
 
             return View(Dbb);
@@ -54,7 +54,7 @@ namespace DemoMvc.Controllers
         [ActionName("AdminAdd")]
         public ActionResult AdminAddD(Db AdminDb)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 LogicDb DbBasee = new LogicDb();
                 DbBasee.AdminInsert(AdminDb);
@@ -84,7 +84,7 @@ namespace DemoMvc.Controllers
 
             UpdateModel(AdminDb);
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 AdminLogics.AdminUpdate(AdminDb);
 
@@ -96,10 +96,13 @@ namespace DemoMvc.Controllers
         public ActionResult Delete(int id)
         {
             LogicDb AdminLogics = new LogicDb();
-             AdminLogics.AdminDelete(id);
+            AdminLogics.AdminDelete(id);
 
             return RedirectToAction("Admin");
         }
+
+        
+
 
 
     }
