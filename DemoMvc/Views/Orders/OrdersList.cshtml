@@ -1,9 +1,12 @@
-﻿@model IEnumerable<OrdersProject.Orders>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<OrdersProject.Orders>
 
 <div class="row">
     <div class="col-md-6">
         <p>
-            @Html.ActionLink("Add New", "CreateOrder" ,null ,new { @class = "btn border"})
+            @Html.ActionLink("Add New", "CreateOrder", null, new { @class = "btn border" })
         </p>
     </div>
 
@@ -18,9 +21,9 @@
                 </div>
 
                 <div class="order-2 ps-2">
-                    @Html.TextBox("Search", null, new { @class = "form-control shadow-none rounded-0" , Style = "height:25px" , placeholder = "Search Here...." })
+                    @Html.TextBox("Search", null, new { @class = "form-control shadow-none rounded-0", Style = "height:25px", placeholder = "Search Here...." })
                 </div>
-                
+
 
             </div>
 
@@ -32,7 +35,7 @@
 
 
 
-@if(Model.Count() == 0)
+@if (Model.Count() == 0)
 {
     <td colspan="7"> No Data Found </td>
 
@@ -42,25 +45,25 @@ else
     <table class="table table-borderless">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OrderID)
+                @Html.DisplayNameFor(model => model.First().OrderID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientName)
+                @Html.DisplayNameFor(model => model.First().ClientName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderType)
+                @Html.DisplayNameFor(model => model.First().OrderType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Qty)
+                @Html.DisplayNameFor(model => model.First().Qty)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ETA_Time)
+                @Html.DisplayNameFor(model => model.First().ETA_Time)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.First().Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Created_Date)
+                @Html.DisplayNameFor(model => model.First().Created_Date)
             </th>
             <th>Action</th>
         </tr>
@@ -86,11 +89,11 @@ else
                     <td style="height:50px;">
                         @Html.DisplayFor(modelItem => item.ETA_Time)
                     </td>
-                    <td style="font-family:'Comic Sans MS'">
-                         
+                    <td >
+
                         @if (item.Status == 1)
                         {
-                           <span class="badge rounded-pill bg-secondary">Yet To Start</span>
+                            <span class="badge rounded-pill bg-secondary">Yet To Start</span>
 
                         }
                         else if (item.Status == 2)
@@ -162,6 +165,20 @@ else
         }
     </table>
 }
+ 
+<div class="d-flex justify-content-center  ">
+    @Html.PagedListPager(Model, page => Url.Action("OrdersList", new
+{
+    page,
+    SearchBy = Request.QueryString["SearchBy"]
+    ,
+    Search = Request.QueryString["Search"]
+}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded }
+
+    )
+
+</div>
+
 
 
 

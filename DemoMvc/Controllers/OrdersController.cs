@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DemoMvc.Models;
 using OrdersProject;
 using System.Reflection;
+using PagedList;
 
 namespace DemoMvc.Controllers
 {
@@ -18,19 +19,17 @@ namespace DemoMvc.Controllers
 
         public object ModalState { get; private set; }
 
-        public ActionResult OrdersList(string SearchBy , string Search)
+        public ActionResult OrdersList(string SearchBy, string Search, int? page)
         {
 
-            if(SearchBy == "ClientName")
+            if (SearchBy == "ClientName")
             {
-                return View(db.Orders.Where(x => x.ClientName.Contains(Search) || Search== null).ToList());
+                return View(db.Orders.Where(x => x.ClientName.Contains(Search) || Search == null).ToList().ToPagedList(page ?? 1, 7));
             }
             else
             {
-                return View(db.Orders.Where(x => x.Status.ToString() ==  Search || Search == null).ToList());
+                return View(db.Orders.Where(x => x.Status.ToString() == Search || Search == null).ToList().ToPagedList(page ?? 1, 7));
             }
-
-            
         }
         public ActionResult CreateOrder()
         {
@@ -41,14 +40,14 @@ namespace DemoMvc.Controllers
 
         public ActionResult CreateOrderr(Orders CreateOrder)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 OrdersDbLogics OrdersLogic = new OrdersDbLogics();
                 OrdersLogic.CreateOrder(CreateOrder);
             }
 
             return RedirectToAction("OrdersList");
-             
+
         }
 
         [HttpGet]
@@ -60,7 +59,7 @@ namespace DemoMvc.Controllers
             return View(orders);
         }
 
-        [HttpPost , ActionName("UpdateOrder")]
+        [HttpPost, ActionName("UpdateOrder")]
         public ActionResult UpdateOrderR(int id)
         {
             OrdersDbLogics Logics = new OrdersDbLogics();
@@ -71,7 +70,7 @@ namespace DemoMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                Logics.UpdateOrder (rders);
+                Logics.UpdateOrder(rders);
 
                 return RedirectToAction("OrdersList");
             }
